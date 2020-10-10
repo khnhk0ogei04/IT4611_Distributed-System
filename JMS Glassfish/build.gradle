@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
+}
+
+dependencies {
+    implementation "org.glassfish.main.appclient:gf-client:$glassfishVersion"
+    implementation "org.glassfish.main.appclient:gf-client-module:$glassfishVersion"
+    implementation "org.glassfish.mq:imqjmsra:$glassfishImqVersion"
+    implementation "org.glassfish.mq:imqbroker:$glassfishImqVersion"
+    implementation "javax.jms:javax.jms-api:2.0.1"
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+task runSender(type: JavaExec) {
+    main = 'com.company.MySender'
+    classpath sourceSets.main.runtimeClasspath
+    standardInput System.in
+}
+
+task runReceiver(type: JavaExec) {
+    main = 'com.company.MyReceiver'
+    classpath sourceSets.main.runtimeClasspath
+}
