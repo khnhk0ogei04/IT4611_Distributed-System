@@ -38,6 +38,12 @@ public class RPCServer {
         
                     System.out.println(" [.] fib(" + message + ")");
                     response += fib(n);
+                    
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
                 } catch (RuntimeException e) {
                     System.out.println(" [.] " + e.toString());
                 } finally {
