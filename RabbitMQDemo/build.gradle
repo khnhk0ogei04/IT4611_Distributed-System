@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+}
+
+group 'com.company'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'com.rabbitmq:amqp-client:5.10.0'
+
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation "org.slf4j:slf4j-simple:$slf4jVersion"
+}
+
+task RunServer(type: JavaExec) {
+    main = 'com.company.RPCServer'
+    classpath sourceSets.main.runtimeClasspath
+}
+
+task RunClient(type: JavaExec) {
+    main = 'com.company.RPCClient'
+    classpath sourceSets.main.runtimeClasspath
+}
